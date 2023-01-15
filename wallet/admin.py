@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import (
     Wallet,
-    Transaction
+    Transaction,
+    FlutterwavePayment
 )
 
 # Register your models here.
@@ -11,4 +12,8 @@ class WalletAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display=["id","wallet","amount","approved"]
+    list_display=["id","tx_ref","wallet","amount","approved"]
+
+@admin.register(FlutterwavePayment)
+class FlutterwavePaymentAdmin(admin.ModelAdmin):
+    list_display=["id","tx_ref","amount","charged_amount","app_fee","merchant_fee","status"]
