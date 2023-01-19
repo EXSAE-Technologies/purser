@@ -28,7 +28,7 @@ main_router.registry.extend(accounts_router.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(main_router.urls)),
+    path('api/',include(main_router.urls)),
     path('openapi/',get_schema_view(
         title="Purser",
         description="eWallet API",

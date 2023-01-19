@@ -18,7 +18,7 @@ docker run -d --network purser-net --network-alias mysql -v purser-data:/var/lib
 
 ### Run the django app on the domain `purser.iitsar.com` and specify a volume to serve media files
 ```bash
-docker run -dp 8181:80 --network purser-net -v /home/iitsar/purser.iitsar.com:/app/media fshangala/purser:main
+docker run -dp 8381:80 --network purser-net -v /home/iitsar/purser.iitsar.com:/app/media fshangala/purser:main
 ```
 
 ## Test in docker
