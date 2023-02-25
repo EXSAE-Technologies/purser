@@ -6,7 +6,7 @@ from .models import (
 import uuid
 
 class TransactionForm(forms.Form):
-  antecedent=forms.IntegerField()
+  #antecedent=forms.IntegerField()
   tx_ref=forms.CharField(widget=forms.TextInput(attrs={
     'class':'form-control',
     'placeholder':'Reference'
@@ -32,4 +32,31 @@ class TransactionForm(forms.Form):
   
   def get_queryset(self):
     return self.request.user.wallets.all()
+  
+  def save(self):
+    #antecendent = Transaction.objects.get(pk=self.cleaned_data["antecedent"])
+    from_wallet = self.cleaned_data["from_wallet"]
+    to_wallet = Wallet.objects.get(pk=self.cleaned_data["to_wallet"])
+    
+    antecedent = Transaction.objects.create(
+      tx_ref=self.cleaned_data["tx_ref"],
+      wallet=from_wallet,
+      amount=-1*float(self.cleaned_data["amount"])
+    )
+    
+    Transaction.objects.create(
+      antecedent=antecedent.id,
+      wallet=to_wallet,
+      amount=float(self.cleaned_data["amount"])
+    )
+    
+  
+  def is_valid(self):
+    try:
+      to_wallet = Wallet.objects.get(pk=self.data.get("to_wallet"))
+    except Wallet.DoesNotExist as e:
+      print(e)
+      return False
+    else:
+      return super().is_valid()
   

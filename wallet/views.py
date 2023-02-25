@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, ViewSet
 from rest_framework.views import APIView
 from rest_framework.decorators import action
@@ -28,14 +28,20 @@ from .forms import TransactionForm
 class WalletDetail(DetailView):
     model=Wallet
     context_object_name="wallet"
+    template_name = "wallet/wallet_detail.html"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["transfer_form"] = TransactionForm(request=self.request)
         return context
     
-    def post(self, request):
-        pass
+    def post(self, request, *args, **kwargs):
+        transaction = TransactionForm(request.POST,request=request)
+        if transaction.is_valid():
+            transaction.save()
+            return redirect("wallet:detail",**kwargs)
+        else:
+            return redirect("wallet:detail",**kwargs)
 
 class CreateWallet(View):
     def get(self,request):
