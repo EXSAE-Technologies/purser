@@ -4,7 +4,8 @@ from .views import (
     UserViewSet,
     AccountLogin,
     AccountProfile,
-    AccountMain
+    AccountMain,
+    UserRegister
 )
 from django.contrib.auth.views import logout_then_login
 
@@ -17,5 +18,6 @@ urlpatterns = [
     path('logout/',logout_then_login,name="logout"),
     path('id/<pk>/',AccountProfile.as_view(),name="profile"),
     path('',AccountMain.as_view(),name="main"),
-    path('profile/',AccountMain.as_view(),name="profile2")
+    path('profile/',AccountMain.as_view(),name="profile2"),
+    path('register/',UserRegister.as_view(),name="register"),
 ]

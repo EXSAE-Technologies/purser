@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container-sm">
+  <div class="card">
+    <div class="card-header bg-primary"><h3 class="card-title">Register</h3></div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="id_username" name="username" placeholder="Username" autofocus autocapitalize="none" autocomplete="username" required>
+          <label for="id_username">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Password" autocomplete="current-password" required>
+          <label for="id_password1">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Password Confirmation" autocomplete="current-password" required>
+          <label for="id_password2">Password Confirmation</label>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </div>
+        <div class="mb-3">
+          {{form.errors}}
+        </div>
+        <div class="mb-3">
+          <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary w-100">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main %}

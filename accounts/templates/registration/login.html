@@ -19,9 +19,11 @@
           <button type="submit" class="btn btn-primary w-100">Login</button>
         </div>
         <div class="mb-3">
-          <a href="#" class="btn btn-outline-primary w-100">Create an account</a>
+          {{form.errors}}
         </div>
-        {{form.errors}}
+        <div class="mb-3">
+          <a href="{% url 'accounts:register' %}" class="btn btn-outline-primary w-100">Create an account</a>
+        </div>
       </form>
     </div>
   </div>
