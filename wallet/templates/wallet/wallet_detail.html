@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+  <div class="card">
+    <div class="card-header"><h5 class="card-title">ID:{{wallet.id}}</h5></div>
+    <div class="card-body">
+      <h5 class="card-title">{{wallet.balance}} {{wallet.currency}}</h5>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+{% endblock main %}

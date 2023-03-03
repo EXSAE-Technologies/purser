@@ -6,10 +6,11 @@
     {% for wallet in wallets %}
     <div class="col">
       <div class="card shadow">
-        <div class="card-header"><h5 class="card-title">{{wallet.id}}</h5></div>
+        <div class="card-header"><h5 class="card-title">ID:{{wallet.id}}</h5></div>
         <div class="card-body">
           <h5 class="card-title">{{wallet.balance}} {{wallet.currency}}</h5>
         </div>
+        <center><a href="{% url 'wallet:detail' pk=wallet.id %}" class="btn btn-outline-secondary w-100">view</a></center>
       </div>
     </div>
     {% empty %}

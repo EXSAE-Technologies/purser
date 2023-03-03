@@ -18,10 +18,15 @@ from rest_framework import status
 from rest_framework.schemas import ManualSchema
 import coreapi
 from django.views.generic import (
-    ListView
+    ListView,
+    DetailView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+
+class WalletDetail(DetailView):
+    model=Wallet
+    context_object_name="wallet"
 
 class CreateWallet(View):
     def get(self,request):

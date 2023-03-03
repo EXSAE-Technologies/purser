@@ -8,7 +8,8 @@ from .views import (
 from django.urls import path
 from .views import (
     WalletList,
-    CreateWallet
+    CreateWallet,
+    WalletDetail
 )
 router = DefaultRouter()
 
@@ -21,4 +22,5 @@ app_name="wallet"
 urlpatterns = [
     path('',WalletList.as_view(), name="list"),
     path('add/',CreateWallet.as_view(),name="create"),
+    path('id/<pk>/',WalletDetail.as_view(),name="detail"),
 ]
