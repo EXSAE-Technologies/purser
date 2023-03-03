@@ -28,7 +28,9 @@ main_router.registry.extend(accounts_router.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(main_router.urls)),
+    path('',include('wallet.urls')),
+    path('accounts/',include('accounts.urls')),
+    path('api/',include(main_router.urls)),
     path('openapi/',get_schema_view(
         title="Purser",
         description="eWallet API",
@@ -38,4 +40,5 @@ urlpatterns = [
         template_name='api/redoc.html',
         extra_context={'schema_url':'openapi-schema'}
     ), name='redoc'),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]

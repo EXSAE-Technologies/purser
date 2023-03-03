@@ -5,6 +5,10 @@ from .views import (
     SendMoneyViewSet,
     FlutterwaveWebhook
 )
+from django.urls import path
+from .views import (
+    WalletList
+)
 router = DefaultRouter()
 
 router.register(r"wallet",viewset=WalletViewSet)
@@ -13,4 +17,6 @@ router.register(r"send-money",viewset=SendMoneyViewSet,basename="send-money")
 router.register(r"flutterwave-webhook",viewset=FlutterwaveWebhook,basename="flutterwave")
 
 app_name="wallet"
-urlpatterns = router.urls
+urlpatterns = [
+    path('',WalletList.as_view(), name="list"),
+]

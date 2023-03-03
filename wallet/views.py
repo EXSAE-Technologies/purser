@@ -17,6 +17,15 @@ from rest_framework.permissions import AllowAny
 from rest_framework import status
 from rest_framework.schemas import ManualSchema
 import coreapi
+from django.views.generic import (
+    ListView
+)
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class WalletList(LoginRequiredMixin,ListView):
+    model = Wallet
+    def get_queryset(self):
+        return self.request.user.wallets.all()
 
 class WalletViewSet(ModelViewSet):
     queryset=Wallet.objects.all()
