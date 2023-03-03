@@ -8,7 +8,7 @@ class Wallet(models.Model):
     CURRENCY=(
         ("zmw","ZMW"),
     )
-    currency=models.CharField(max_length=200,choices=CURRENCY)
+    currency=models.CharField(max_length=200,choices=CURRENCY,default="zmw")
     balance=models.FloatField(default=0.0,editable=False)
     active=models.BooleanField(default=True)
     

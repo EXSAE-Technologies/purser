@@ -7,7 +7,8 @@ from .views import (
 )
 from django.urls import path
 from .views import (
-    WalletList
+    WalletList,
+    CreateWallet
 )
 router = DefaultRouter()
 
@@ -19,4 +20,5 @@ router.register(r"flutterwave-webhook",viewset=FlutterwaveWebhook,basename="flut
 app_name="wallet"
 urlpatterns = [
     path('',WalletList.as_view(), name="list"),
+    path('add/',CreateWallet.as_view(),name="create"),
 ]

@@ -1,1 +1,27 @@
 {% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for wallet in wallets %}
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header"><h5 class="card-title">{{wallet.id}}</h5></div>
+        <div class="card-body">
+          <h5 class="card-title">{{wallet.balance}} {{wallet.currency}}</h5>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">No wallets</h5>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <center class="m-3 p-3 shadow"><a href="{% url 'wallet:create' %}" class="btn btn-outline-primary">Add Wallet</a></center>
+</div>
+{% endblock main %}

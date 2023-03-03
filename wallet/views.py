@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, ViewSet
 from rest_framework.views import APIView
 from rest_framework.decorators import action
@@ -21,9 +21,16 @@ from django.views.generic import (
     ListView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+
+class CreateWallet(View):
+    def get(self,request):
+        Wallet.objects.create(user=request.user)
+        return redirect("wallet:list")
 
 class WalletList(LoginRequiredMixin,ListView):
     model = Wallet
+    context_object_name="wallets"
     def get_queryset(self):
         return self.request.user.wallets.all()
 
