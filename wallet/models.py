@@ -51,8 +51,9 @@ class FlutterwaveTransfer(models.Model):
         return self.reference
 
 class Transaction(models.Model):
-    tx_ref=models.CharField(max_length=200, unique=True)
-    wallet=models.ForeignKey(Wallet,on_delete=models.CASCADE)
+    antecedent=models.BigIntegerField(null=True)
+    tx_ref=models.CharField(max_length=200, unique=True, default=uuid.uuid4())
+    wallet=models.ForeignKey(Wallet,related_name="transactions",on_delete=models.CASCADE)
     amount=models.FloatField()
     approved=models.BooleanField(default=False,editable=False)
     

@@ -23,10 +23,19 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from .forms import TransactionForm
 
 class WalletDetail(DetailView):
     model=Wallet
     context_object_name="wallet"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["transfer_form"] = TransactionForm(request=self.request)
+        return context
+    
+    def post(self, request):
+        pass
 
 class CreateWallet(View):
     def get(self,request):
