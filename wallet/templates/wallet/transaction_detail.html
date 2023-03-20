@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+  <div class="card text-center mb-3">
+    <div class="card-header bg-primary"><h5 class="card-title">Reference: {{transaction.tx_ref}}</h5></div>
+    <div class="card-body">
+      <h5 class="card-title">{{transaction.wallet.user.username}}:{{transaction.wallet.id}} | {{transaction.amount}} {{transaction.wallet.currency}}</h5>
+      {% if transaction.amount < 0 %}
+      <hr>
+      <div class="mb-3">
+        {% if not transaction.approved %}
+        <div class="mb-3">
+          <a href="{% url 'wallet:approve-transaction' pk=transaction.id %}" class="btn btn-success">Approve</a>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-danger">Decline</button>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock main %}

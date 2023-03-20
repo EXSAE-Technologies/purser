@@ -52,10 +52,10 @@
       <h5 class="card-title">Transaction History</h5>
       <div class="list-group">
         {% for transaction in wallet.transactions.all %}
-        <a href="#" class="list-group-item list-group-item-action">
+        <a href="{% url 'wallet:transaction-detail' pk=transaction.id %}" class="list-group-item list-group-item-action {% if transaction.approved %}text-success{% else %}text-warning{% endif %}">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{transaction.tx_ref}}</h5>
-            <small class="text-muted">{{transaction.approved}}</small>
+            <small class="text-muted"></small>
           </div>
           <p class="mb-1">{{transaction.amount}}</p>
         </a>

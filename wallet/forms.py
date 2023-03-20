@@ -44,11 +44,14 @@ class TransactionForm(forms.Form):
       amount=-1*float(self.cleaned_data["amount"])
     )
     
-    Transaction.objects.create(
+    transaction = Transaction.objects.create(
       antecedent=antecedent.id,
       wallet=to_wallet,
       amount=float(self.cleaned_data["amount"])
     )
+    
+    antecedent.antecedent = transaction.id
+    antecedent.save()
     
   
   def is_valid(self):

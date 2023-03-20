@@ -9,7 +9,9 @@ from django.urls import path
 from .views import (
     WalletList,
     CreateWallet,
-    WalletDetail
+    WalletDetail,
+    TransactionDetail,
+    ApproveTransaction
 )
 router = DefaultRouter()
 
@@ -23,4 +25,6 @@ urlpatterns = [
     path('',WalletList.as_view(), name="list"),
     path('add/',CreateWallet.as_view(),name="create"),
     path('id/<pk>/',WalletDetail.as_view(),name="detail"),
+    path('transaction/id/<pk>/',TransactionDetail.as_view(),name="transaction-detail"),
+    path('transaction/id/<pk>/approve/',ApproveTransaction.as_view(),name="approve-transaction"),
 ]

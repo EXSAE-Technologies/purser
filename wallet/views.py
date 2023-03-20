@@ -19,11 +19,28 @@ from rest_framework.schemas import ManualSchema
 import coreapi
 from django.views.generic import (
     ListView,
-    DetailView
+    DetailView,
+    TemplateView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import TransactionForm
+
+class ApproveTransaction(TemplateView):
+    template_name="wallet/approve_transaction.html"
+    
+    def get(self,request,pk):
+        transaction = Transaction.objects.get(pk=pk)
+        antecedent = Transaction.objects.get(pk=transaction.antecedent)
+        context = {
+            "transaction":transaction,
+            "antecedent":antecedent
+        }
+        return render(request, self.template_name, context)
+
+class TransactionDetail(DetailView):
+    model=Transaction
+    context_object_name="transaction"
 
 class WalletDetail(DetailView):
     model=Wallet
